@@ -17,3 +17,11 @@
 .checkbox {
   @apply h-4 w-4 rounded-sm border-primary-700 text-primary-700  hover:cursor-pointer;
 }
+
+.form {
+  @apply rounded-md px-3 py-1 focus:outline-none;
+}
+
+.form-green {
+  @apply border-2 border-primary-200  text-primary-800 placeholder:text-primary-800 focus:border-primary-700;
+}
