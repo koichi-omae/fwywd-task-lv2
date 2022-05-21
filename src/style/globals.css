@@ -13,3 +13,7 @@
 .btn-pink {
   @apply bg-gradient-to-r from-pink-800 to-pink-600;
 }
+
+.checkbox {
+  @apply h-4 w-4 rounded-sm border-primary-700 text-primary-700  hover:cursor-pointer;
+}
