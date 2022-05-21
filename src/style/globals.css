@@ -1,3 +1,15 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+.btn {
+  @apply rounded-md py-2.5 px-5 text-base text-white hover:opacity-70;
+}
+
+.btn-green {
+  @apply bg-gradient-to-r from-primary-800 to-primary-500;
+}
+
+.btn-pink {
+  @apply bg-gradient-to-r from-pink-800 to-pink-600;
+}
