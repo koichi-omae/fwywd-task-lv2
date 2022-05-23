@@ -7,12 +7,12 @@ export const todoState = atom<FormProps[]>({
     {
       title: 'title1',
       task: 'task1',
-      isComplete: false,
+      checked: false,
     },
     {
       title: 'title2',
       task: 'task2',
-      isComplete: true,
+      checked: true,
     },
   ],
 });

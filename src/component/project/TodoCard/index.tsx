@@ -1,7 +1,10 @@
+import axios from 'axios';
+import { useEffect } from 'react';
 import { useRecoilValue, useSetRecoilState } from 'recoil';
 import { TodoCard as TodoCardPresenter } from './TodoCard';
 import { TodoCardProps, LogicProps } from './TodoCard.type';
 import { useCreateModal, useDescriptionModal, useDeleteModal } from '@/hook/useModal';
+import { useCompleted, useTodoSWR } from '@/hook/useTodoSWR';
 import { indexState } from '@/model';
 import { formState } from '@/model/form';
 import { todoState } from '@/model/todo';
@@ -12,17 +15,30 @@ const TodoCard: React.FC = () => {
   const { openCreate } = useCreateModal();
   const { openDescription } = useDescriptionModal();
   const { openDelete } = useDeleteModal();
+  const { isData } = useTodoSWR();
   const isTodo = useRecoilValue(todoState);
   const setIndex = useSetRecoilState(indexState);
   const setForm = useSetRecoilState(formState);
   const setTodo = useSetRecoilState(todoState);
 
+  useEffect(() => {
+    setTodo(isData!);
+  }, [setTodo, isData]);
+
   const handleComplete = (e: React.ChangeEvent<HTMLInputElement>, index: number) => {
     setTodo((prevTodo) => {
       const completeTodo = [...prevTodo];
-      completeTodo[index] = { ...completeTodo[index], isComplete: e.target.checked };
+      completeTodo[index] = { ...completeTodo[index], checked: e.target.checked };
       return completeTodo;
     });
+    const reqData = {
+      id: isTodo[index].id,
+      title: isTodo[index].title,
+      task: isTodo[index].task,
+      checked: e.target.checked,
+    };
+
+    axios.put(`/api/todo/${isTodo[index].id}`, { reqData });
   };
 
   const handleDescription = (index: number) => {
@@ -32,6 +48,7 @@ const TodoCard: React.FC = () => {
   };
   const handleDelete = (i: number) => {
     setForm(isTodo[i]);
+    setIndex(i);
     openDelete();
   };
   const LogicData: LogicProps = {
@@ -67,16 +84,30 @@ const CompleteCard: React.FC = () => {
   const { openDescription } = useDescriptionModal();
   const { openDelete } = useDeleteModal();
   const isTodo = useRecoilValue(todoState);
+  const { isData } = useTodoSWR();
+
   const setIndex = useSetRecoilState(indexState);
   const setForm = useSetRecoilState(formState);
   const setTodo = useSetRecoilState(todoState);
 
+  useEffect(() => {
+    setTodo(isData!);
+  }, [setTodo, isData]);
+
   const handleComplete = (e: React.ChangeEvent<HTMLInputElement>, index: number) => {
     setTodo((prevTodo) => {
       const completeTodo = [...prevTodo];
-      completeTodo[index] = { ...completeTodo[index], isComplete: e.target.checked };
+      completeTodo[index] = { ...completeTodo[index], checked: e.target.checked };
       return completeTodo;
     });
+    const reqData = {
+      id: isTodo[index].id,
+      title: isTodo[index].title,
+      task: isTodo[index].task,
+      checked: e.target.checked,
+    };
+
+    axios.put(`/api/todo/${isTodo[index].id}`, { reqData });
   };
 
   const handleDescription = (index: number) => {
@@ -85,12 +116,18 @@ const CompleteCard: React.FC = () => {
     openDescription();
   };
 
+  const handleDelete = (i: number) => {
+    setForm(isTodo[i]);
+    setIndex(i);
+    openDelete();
+  };
+
   const LogicData: LogicProps = {
     openCreate: openCreate,
     isTodo: isTodo,
     isComplete: handleComplete,
     openDescription: handleDescription,
-    openDelete: openDelete,
+    openDelete: handleDelete,
   };
 
   const defaultProps: TodoCardProps = {

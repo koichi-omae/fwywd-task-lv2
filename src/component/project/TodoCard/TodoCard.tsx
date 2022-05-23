@@ -33,12 +33,12 @@ export const TodoCard: React.FC<TodoCardProps & LogicProps> = ({
       ) : (
         isTodo.map(
           (todo, index) =>
-            todo.isComplete === showList && (
+            todo.checked === showList && (
               <div key={index} className='my-2 flex items-center gap-3 px-5'>
                 <input
                   type='checkbox'
                   className='checkbox'
-                  defaultChecked={todo.isComplete}
+                  defaultChecked={todo.checked}
                   onChange={(e) => isComplete(e, index)}
                 />
                 <p

@@ -51,7 +51,7 @@
       }
     },
     {
-      "files": ["src/pages/**/*.tsx", "**/*.js", "*.stories.@(ts|tsx|js|jsx|mjs|cjs)"],
+      "files": ["src/pages/**/*.tsx", "**/*.js", "**/*.ts", "*.stories.@(ts|tsx|js|jsx|mjs|cjs)"],
       "rules": { "import/no-default-export": "off" }
     }
   ]

@@ -1,3 +1,4 @@
+import axios from 'axios';
 import { useRecoilValue, useSetRecoilState } from 'recoil';
 import { CreateModal as CreateModalPresenter } from './CreateModal';
 import { CreateModalProps, LogicProps } from './CreateModal.type';
@@ -23,7 +24,9 @@ const CreateModal: React.FC = () => {
 
   const handleCreate = () => {
     setTodo((prevTodo) => [...prevTodo, isForm]);
-    setForm({ ...isForm, title: '', task: '', isComplete: false });
+    const data = isForm;
+    axios.post('/api/todo', { data });
+    setForm({ ...isForm, title: '', task: '', checked: false });
     closeCreate();
   };
 

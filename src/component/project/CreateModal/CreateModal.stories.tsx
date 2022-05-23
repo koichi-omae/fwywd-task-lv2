@@ -37,7 +37,7 @@ const Template: Story<CreateModalProps & LogicProps> = (args) => {
 
   const handleCreate = () => {
     setTodo((prevTodo) => [...prevTodo, isForm]);
-    setForm({ ...isForm, title: '', task: '', isComplete: false });
+    setForm({ ...isForm, title: '', task: '', checked: false });
     closeCreate();
   };
 

@@ -4,7 +4,7 @@ export interface FormProps {
   id?: number;
   title: string;
   task: string;
-  isComplete: boolean;
+  checked: boolean;
 }
 
 export const formState = atom<FormProps>({
@@ -12,6 +12,6 @@ export const formState = atom<FormProps>({
   default: {
     title: '',
     task: '',
-    isComplete: false,
+    checked: false,
   },
 });

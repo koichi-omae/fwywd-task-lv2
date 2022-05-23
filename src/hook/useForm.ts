@@ -4,10 +4,10 @@ interface FormProps {
   id?: number;
   title: string;
   task: string;
-  isComplete: boolean;
+  checked: boolean;
 }
 
 export const useForm = () => {
-  const [isForm, setForm] = useState<FormProps>({ title: '', task: '', isComplete: false });
+  const [isForm, setForm] = useState<FormProps>({ title: '', task: '', checked: false });
   return { isForm, setForm };
 };

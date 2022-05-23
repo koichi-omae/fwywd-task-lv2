@@ -1,9 +1,11 @@
 import { ComponentMeta, Story } from '@storybook/react';
+import { useEffect } from 'react';
 import { useRecoilValue, useSetRecoilState, RecoilRoot } from 'recoil';
 import { TodoCard } from './TodoCard';
 import { propObj } from './TodoCard.props';
 import { TodoCardProps, LogicProps } from './TodoCard.type';
 import { useCreateModal, useDescriptionModal, useDeleteModal } from '@/hook/useModal';
+import { useTodoSWR } from '@/hook/useTodoSWR';
 import { formState } from '@/model/form';
 import { todoState } from '@/model/todo';
 
@@ -23,14 +25,19 @@ const Template: Story<TodoCardProps & LogicProps> = (args) => {
   const { openCreate } = useCreateModal();
   const { openDescription } = useDescriptionModal();
   const { openDelete } = useDeleteModal();
+  const { isData } = useTodoSWR();
   const isTodo = useRecoilValue(todoState);
   const setForm = useSetRecoilState(formState);
   const setTodo = useSetRecoilState(todoState);
 
+  useEffect(() => {
+    setTodo(isData!);
+  }, [setTodo, isData]);
+
   const handleComplete = (e: React.ChangeEvent<HTMLInputElement>, index: number) => {
     setTodo((prevTodo) => {
       const completeTodo = [...prevTodo];
-      completeTodo[index] = { ...completeTodo[index], isComplete: e.target.checked };
+      completeTodo[index] = { ...completeTodo[index], checked: e.target.checked };
       return completeTodo;
     });
   };
