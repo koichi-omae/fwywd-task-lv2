@@ -1,4 +1,5 @@
 import { CreateModal } from '../CreateModal';
+import { DeleteModal } from '../DeleteModal';
 import { DescriptionModal } from '../DescriptionModal';
 import { TodoCard, CompleteCard } from '../TodoCard';
 import { UpdateModal } from '../UpdateModal';
@@ -14,5 +15,6 @@ export const Todo: React.FC<TodoProps> = ({ title }) => (
     <CreateModal />
     <DescriptionModal />
     <UpdateModal />
+    <DeleteModal />
   </div>
 );

@@ -1,5 +1,5 @@
 import { useSetRecoilState } from 'recoil';
-import { createState, descriptionState, updateState } from '@/model/modal';
+import { createState, descriptionState, updateState, deleteState } from '@/model/modal';
 
 export const useCreateModal = () => {
   const setCreate = useSetRecoilState(createState);
@@ -26,4 +26,13 @@ export const useUpdateModal = () => {
   const closeUpdate = () => setUpdate(false);
 
   return { openUpdate, closeUpdate };
+};
+
+export const useDeleteModal = () => {
+  const setDelete = useSetRecoilState(deleteState);
+
+  const openDelete = () => setDelete(true);
+  const closeDelete = () => setDelete(false);
+
+  return { openDelete, closeDelete };
 };

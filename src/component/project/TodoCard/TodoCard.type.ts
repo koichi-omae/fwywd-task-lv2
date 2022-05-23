@@ -25,4 +25,5 @@ export interface LogicProps {
   isTodo: FormProps[];
   isComplete: (e: React.ChangeEvent<HTMLInputElement>, index: number) => void;
   openDescription: (i: number) => void;
+  openDelete: (i: number) => void;
 }

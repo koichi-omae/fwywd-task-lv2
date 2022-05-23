@@ -13,6 +13,7 @@ export const TodoCard: React.FC<TodoCardProps & LogicProps> = ({
   isTodo,
   isComplete,
   openDescription,
+  openDelete,
 }) => (
   <div className='relative mt-9 bg-white shadow-md shadow-primary-200'>
     <span className={titleStyle}>{title}</span>
@@ -52,7 +53,7 @@ export const TodoCard: React.FC<TodoCardProps & LogicProps> = ({
                   width={crossImage.width}
                   height={crossImage.height}
                   className='opacity-70 hover:cursor-pointer hover:opacity-100'
-                  //onClick={}
+                  onClick={() => openDelete(index)}
                 />
               </div>
             ),

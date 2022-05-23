@@ -3,7 +3,7 @@ import { useRecoilValue, useSetRecoilState, RecoilRoot } from 'recoil';
 import { TodoCard } from './TodoCard';
 import { propObj } from './TodoCard.props';
 import { TodoCardProps, LogicProps } from './TodoCard.type';
-import { useCreateModal, useDescriptionModal } from '@/hook/useModal';
+import { useCreateModal, useDescriptionModal, useDeleteModal } from '@/hook/useModal';
 import { formState } from '@/model/form';
 import { todoState } from '@/model/todo';
 
@@ -22,6 +22,7 @@ export default {
 const Template: Story<TodoCardProps & LogicProps> = (args) => {
   const { openCreate } = useCreateModal();
   const { openDescription } = useDescriptionModal();
+  const { openDelete } = useDeleteModal();
   const isTodo = useRecoilValue(todoState);
   const setForm = useSetRecoilState(formState);
   const setTodo = useSetRecoilState(todoState);
@@ -39,11 +40,17 @@ const Template: Story<TodoCardProps & LogicProps> = (args) => {
     openDescription;
   };
 
+  const handleDelete = (i: number) => {
+    setForm(isTodo[i]);
+    openDelete;
+  };
+
   const LogicData: LogicProps = {
     openCreate: openCreate,
     isTodo: isTodo,
     isComplete: handleComplete,
     openDescription: handleDescription,
+    openDelete: handleDelete,
   };
 
   return <TodoCard {...args} {...LogicData} />;

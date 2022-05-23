@@ -1,24 +1,17 @@
 import { useRecoilValue, useSetRecoilState } from 'recoil';
 import { TodoCard as TodoCardPresenter } from './TodoCard';
 import { TodoCardProps, LogicProps } from './TodoCard.type';
-import { useCreateModal, useDescriptionModal } from '@/hook/useModal';
+import { useCreateModal, useDescriptionModal, useDeleteModal } from '@/hook/useModal';
 import { indexState } from '@/model';
 import { formState } from '@/model/form';
 import { todoState } from '@/model/todo';
 import AddImage from '~/img/add.png';
 import CrossImage from '~/img/cross.png';
-/**
- * ロジックが存在しない（= Container が要らない）場合は 以下と置き換えてください。
- * 存在する場合はコメントアウト部分を全て削除して使ってください。
- */
-/* 
-export type { TodoCardProps };
-export { TodoCardPresenter};
-*/
 
 const TodoCard: React.FC = () => {
   const { openCreate } = useCreateModal();
   const { openDescription } = useDescriptionModal();
+  const { openDelete } = useDeleteModal();
   const isTodo = useRecoilValue(todoState);
   const setIndex = useSetRecoilState(indexState);
   const setForm = useSetRecoilState(formState);
@@ -37,12 +30,16 @@ const TodoCard: React.FC = () => {
     setForm(isTodo[index]);
     openDescription();
   };
-
+  const handleDelete = (i: number) => {
+    setForm(isTodo[i]);
+    openDelete();
+  };
   const LogicData: LogicProps = {
     openCreate: openCreate,
     isTodo: isTodo,
     isComplete: handleComplete,
     openDescription: handleDescription,
+    openDelete: handleDelete,
   };
 
   const defaultProps: TodoCardProps = {
@@ -68,6 +65,7 @@ const TodoCard: React.FC = () => {
 const CompleteCard: React.FC = () => {
   const { openCreate } = useCreateModal();
   const { openDescription } = useDescriptionModal();
+  const { openDelete } = useDeleteModal();
   const isTodo = useRecoilValue(todoState);
   const setIndex = useSetRecoilState(indexState);
   const setForm = useSetRecoilState(formState);
@@ -92,6 +90,7 @@ const CompleteCard: React.FC = () => {
     isTodo: isTodo,
     isComplete: handleComplete,
     openDescription: handleDescription,
+    openDelete: openDelete,
   };
 
   const defaultProps: TodoCardProps = {
