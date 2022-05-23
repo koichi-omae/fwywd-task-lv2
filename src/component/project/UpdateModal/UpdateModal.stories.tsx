@@ -46,7 +46,7 @@ const Template: Story<UpdateModalProps & LogicProps> = (args) => {
       updateTodo.splice(isIndex, 1, {
         title: isForm.title,
         task: isForm.task,
-        isComplete: isForm.isComplete,
+        checked: isForm.checked,
       });
       return updateTodo;
     });
