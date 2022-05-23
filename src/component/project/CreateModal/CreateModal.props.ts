@@ -1,6 +1,4 @@
-import React, { useState } from 'react';
 import { CreateModalProps } from './CreateModal.type';
-import { useCreateModal } from '@/hook/useModal';
 import CrossImage from '~/img/cross.png';
 
 export const propObj: { [key: string]: CreateModalProps } = {
