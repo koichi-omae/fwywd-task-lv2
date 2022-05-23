@@ -1,7 +1,7 @@
 import { useRecoilValue } from 'recoil';
 import { DescriptionModal as DescriptionModalPresenter } from './DescriptionModal';
 import { DescriptionModalProps, LogicProps } from './DescriptionModal.type';
-import { useDescriptionModal } from '@/hook/useModal';
+import { useDescriptionModal, useUpdateModal } from '@/hook/useModal';
 import { formState } from '@/model/form';
 import { descriptionState } from '@/model/modal';
 import CrossImage from '~/img/cross.png';
@@ -16,15 +16,21 @@ export { DescriptionModalPresenter};
 
 const DescriptionModal: React.FC = () => {
   const isOpen = useRecoilValue(descriptionState);
-  const { closeDescription } = useDescriptionModal();
   const isForm = useRecoilValue(formState);
+  const { closeDescription } = useDescriptionModal();
+  const { openUpdate } = useUpdateModal();
+
+  const changeUpdate = () => {
+    closeDescription();
+    openUpdate();
+  };
 
   const Data: LogicProps = {
     isOpen: isOpen,
     title: isForm.title,
     tasks: isForm.task.split('\n'),
     closeClick: closeDescription,
-    updateClick: closeDescription,
+    updateClick: changeUpdate,
   };
   const defaultProps: DescriptionModalProps = {
     crossImage: {

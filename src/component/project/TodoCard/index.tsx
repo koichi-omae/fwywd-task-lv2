@@ -2,6 +2,7 @@ import { useRecoilValue, useSetRecoilState } from 'recoil';
 import { TodoCard as TodoCardPresenter } from './TodoCard';
 import { TodoCardProps, LogicProps } from './TodoCard.type';
 import { useCreateModal, useDescriptionModal } from '@/hook/useModal';
+import { indexState } from '@/model';
 import { formState } from '@/model/form';
 import { todoState } from '@/model/todo';
 import AddImage from '~/img/add.png';
@@ -19,6 +20,7 @@ const TodoCard: React.FC = () => {
   const { openCreate } = useCreateModal();
   const { openDescription } = useDescriptionModal();
   const isTodo = useRecoilValue(todoState);
+  const setIndex = useSetRecoilState(indexState);
   const setForm = useSetRecoilState(formState);
   const setTodo = useSetRecoilState(todoState);
 
@@ -31,6 +33,7 @@ const TodoCard: React.FC = () => {
   };
 
   const handleDescription = (index: number) => {
+    setIndex(index);
     setForm(isTodo[index]);
     openDescription();
   };
@@ -66,6 +69,7 @@ const CompleteCard: React.FC = () => {
   const { openCreate } = useCreateModal();
   const { openDescription } = useDescriptionModal();
   const isTodo = useRecoilValue(todoState);
+  const setIndex = useSetRecoilState(indexState);
   const setForm = useSetRecoilState(formState);
   const setTodo = useSetRecoilState(todoState);
 
@@ -78,6 +82,7 @@ const CompleteCard: React.FC = () => {
   };
 
   const handleDescription = (index: number) => {
+    setIndex(index);
     setForm(isTodo[index]);
     openDescription();
   };

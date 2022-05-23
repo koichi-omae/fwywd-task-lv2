@@ -9,3 +9,8 @@ export const descriptionState = atom<boolean>({
   key: 'descriptionState',
   default: false,
 });
+
+export const updateState = atom<boolean>({
+  key: 'updateState',
+  default: true,
+});
