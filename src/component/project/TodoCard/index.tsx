@@ -48,6 +48,7 @@ const TodoCard: React.FC = () => {
   };
   const handleDelete = (i: number) => {
     setForm(isTodo[i]);
+    setIndex(i);
     openDelete();
   };
   const LogicData: LogicProps = {
@@ -115,12 +116,18 @@ const CompleteCard: React.FC = () => {
     openDescription();
   };
 
+  const handleDelete = (i: number) => {
+    setForm(isTodo[i]);
+    setIndex(i);
+    openDelete();
+  };
+
   const LogicData: LogicProps = {
     openCreate: openCreate,
     isTodo: isTodo,
     isComplete: handleComplete,
     openDescription: handleDescription,
-    openDelete: openDelete,
+    openDelete: handleDelete,
   };
 
   const defaultProps: TodoCardProps = {

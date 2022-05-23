@@ -1,3 +1,4 @@
+import axios from 'axios';
 import { useRecoilValue, useSetRecoilState } from 'recoil';
 import { DeleteModal as DeleteModalPresenter } from './DeleteModal';
 import { DeleteModalProps, LogicProps } from './DeleteModal.type';
@@ -20,17 +21,20 @@ export { DeleteModalPresenter};
 const DeleteModal: React.FC = () => {
   const isOpen = useRecoilValue(deleteState);
   const isForm = useRecoilValue(formState);
+  const isTodo = useRecoilValue(todoState);
   const isIndex = useRecoilValue(indexState);
   const setIndex = useSetRecoilState(indexState);
   const setTodo = useSetRecoilState(todoState);
   const { closeDelete } = useDeleteModal();
 
   const handleDelete = () => {
+    const id = isTodo[isIndex].id;
     setTodo((prevTodo) => {
       const deleteTodo = [...prevTodo];
       deleteTodo.splice(isIndex, 1);
       return deleteTodo;
     });
+    axios.delete(`/api/todo/${id}`, { data: { id: id } });
     setIndex(0);
     closeDelete();
   };
