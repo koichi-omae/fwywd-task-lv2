@@ -1,5 +1,5 @@
 import { render, screen } from '@testing-library/react';
-import { List, baseId } from './List';
+import { List } from './List';
 import { propObj } from './List.props';
 import { ListProps } from './List.type';
 
