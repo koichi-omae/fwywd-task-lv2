@@ -1,5 +1,5 @@
 import { useSetRecoilState } from 'recoil';
-import { createState } from '@/model/modal';
+import { createState, descriptionState } from '@/model/modal';
 
 export const useCreateModal = () => {
   const setCreate = useSetRecoilState(createState);
@@ -8,4 +8,13 @@ export const useCreateModal = () => {
   const closeCreate = () => setCreate(false);
 
   return { openCreate, closeCreate };
+};
+
+export const useDescriptionModal = () => {
+  const setDescription = useSetRecoilState(descriptionState);
+
+  const openDescription = () => setDescription(true);
+  const closeDescription = () => setDescription(false);
+
+  return { openDescription, closeDescription };
 };

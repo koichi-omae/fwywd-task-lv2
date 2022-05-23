@@ -1,4 +1,5 @@
 import { CreateModal } from '../CreateModal';
+import { DescriptionModal } from '../DescriptionModal';
 import { TodoCard, CompleteCard } from '../TodoCard';
 import { TodoProps } from './Todo.type';
 
@@ -10,5 +11,6 @@ export const Todo: React.FC<TodoProps> = ({ title }) => (
     <TodoCard />
     <CompleteCard />
     <CreateModal />
+    <DescriptionModal />
   </div>
 );

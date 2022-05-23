@@ -1,7 +1,8 @@
 import { useRecoilValue, useSetRecoilState } from 'recoil';
 import { TodoCard as TodoCardPresenter } from './TodoCard';
 import { TodoCardProps, LogicProps } from './TodoCard.type';
-import { useCreateModal } from '@/hook/useModal';
+import { useCreateModal, useDescriptionModal } from '@/hook/useModal';
+import { formState } from '@/model/form';
 import { todoState } from '@/model/todo';
 import AddImage from '~/img/add.png';
 import CrossImage from '~/img/cross.png';
@@ -16,7 +17,9 @@ export { TodoCardPresenter};
 
 const TodoCard: React.FC = () => {
   const { openCreate } = useCreateModal();
+  const { openDescription } = useDescriptionModal();
   const isTodo = useRecoilValue(todoState);
+  const setForm = useSetRecoilState(formState);
   const setTodo = useSetRecoilState(todoState);
 
   const handleComplete = (e: React.ChangeEvent<HTMLInputElement>, index: number) => {
@@ -27,10 +30,16 @@ const TodoCard: React.FC = () => {
     });
   };
 
+  const handleDescription = (index: number) => {
+    setForm(isTodo[index]);
+    openDescription();
+  };
+
   const LogicData: LogicProps = {
     openCreate: openCreate,
     isTodo: isTodo,
     isComplete: handleComplete,
+    openDescription: handleDescription,
   };
 
   const defaultProps: TodoCardProps = {
@@ -55,7 +64,9 @@ const TodoCard: React.FC = () => {
 
 const CompleteCard: React.FC = () => {
   const { openCreate } = useCreateModal();
+  const { openDescription } = useDescriptionModal();
   const isTodo = useRecoilValue(todoState);
+  const setForm = useSetRecoilState(formState);
   const setTodo = useSetRecoilState(todoState);
 
   const handleComplete = (e: React.ChangeEvent<HTMLInputElement>, index: number) => {
@@ -66,10 +77,16 @@ const CompleteCard: React.FC = () => {
     });
   };
 
+  const handleDescription = (index: number) => {
+    setForm(isTodo[index]);
+    openDescription();
+  };
+
   const LogicData: LogicProps = {
     openCreate: openCreate,
     isTodo: isTodo,
     isComplete: handleComplete,
+    openDescription: handleDescription,
   };
 
   const defaultProps: TodoCardProps = {

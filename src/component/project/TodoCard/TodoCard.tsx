@@ -12,6 +12,7 @@ export const TodoCard: React.FC<TodoCardProps & LogicProps> = ({
   openCreate,
   isTodo,
   isComplete,
+  openDescription,
 }) => (
   <div className='relative mt-9 bg-white shadow-md shadow-primary-200'>
     <span className={titleStyle}>{title}</span>
@@ -39,7 +40,10 @@ export const TodoCard: React.FC<TodoCardProps & LogicProps> = ({
                   defaultChecked={todo.isComplete}
                   onChange={(e) => isComplete(e, index)}
                 />
-                <p className='text-base font-bold text-primary-800 hover:cursor-pointer hover:opacity-70'>
+                <p
+                  className='text-base font-bold text-primary-800 hover:cursor-pointer hover:opacity-70'
+                  onClick={() => openDescription(index)}
+                >
                   {todo.title}
                 </p>
                 <Image

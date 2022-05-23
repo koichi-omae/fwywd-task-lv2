@@ -1,6 +1,6 @@
 import { useState } from 'react';
 
-export interface FormProps {
+interface FormProps {
   id?: number;
   title: string;
   task: string;
