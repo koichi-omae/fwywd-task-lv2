@@ -1,3 +1,4 @@
+import axios from 'axios';
 import { useRecoilValue, useSetRecoilState } from 'recoil';
 import { UpdateModal as UpdateModalPresenter } from './UpdateModal';
 import { UpdateModalProps, LogicProps } from './UpdateModal.type';
@@ -11,6 +12,7 @@ import CrossImage from '~/img/cross.png';
 const UpdateModal: React.FC = () => {
   const isOpen = useRecoilValue(updateState);
   const isForm = useRecoilValue(formState);
+  const isTodo = useRecoilValue(todoState);
   const isIndex = useRecoilValue(indexState);
   const setIndex = useSetRecoilState(indexState);
   const setForm = useSetRecoilState(formState);
@@ -32,10 +34,17 @@ const UpdateModal: React.FC = () => {
       updateTodo.splice(isIndex, 1, {
         title: isForm.title,
         task: isForm.task,
-        isComplete: isForm.isComplete,
+        checked: isForm.checked,
       });
       return updateTodo;
     });
+    const reqData = {
+      id: isForm.id,
+      title: isForm.title,
+      task: isForm.task,
+      checked: isForm.checked,
+    };
+    axios.put(`/api/todo/${reqData.id}`, { reqData });
     setIndex(0);
     closeUpdate();
   };
