@@ -10,6 +10,7 @@ export const PageHeader: React.FC<PageHeaderProps> = ({ logoImage }) => (
       alt={logoImage.alt}
       width={logoImage.width}
       height={logoImage.height}
+      data-testid={baseId}
     />
   </header>
 );

@@ -4,7 +4,7 @@ import { propObj } from './PageHeader.props';
 import { PageHeaderProps } from './PageHeader.type';
 
 export default {
-  title: '/PageHeader',
+  title: 'Project/PageHeader',
   component: PageHeader,
 } as ComponentMeta<typeof PageHeader>;
 
