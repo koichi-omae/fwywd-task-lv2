@@ -12,7 +12,6 @@ import CrossImage from '~/img/cross.png';
 const UpdateModal: React.FC = () => {
   const isOpen = useRecoilValue(updateState);
   const isForm = useRecoilValue(formState);
-  const isTodo = useRecoilValue(todoState);
   const isIndex = useRecoilValue(indexState);
   const setIndex = useSetRecoilState(indexState);
   const setForm = useSetRecoilState(formState);
