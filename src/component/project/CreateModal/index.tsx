@@ -23,7 +23,7 @@ const CreateModal: React.FC = () => {
 
   const handleCreate = () => {
     setTodo((prevTodo) => [...prevTodo, isForm]);
-    setForm({ ...isForm, title: '', task: '', isComplete: false });
+    setForm({ ...isForm, title: '', task: '', checked: false });
     closeCreate();
   };
 
