@@ -11,19 +11,11 @@ import { todoState } from '@/model/todo';
 import AddImage from '~/img/add.png';
 import CrossImage from '~/img/cross.png';
 
-interface TodoProps {
-  id: number;
-  title: string;
-  task: string;
-  checked: boolean;
-}
-
 const TodoCard: React.FC = () => {
   const { openCreate } = useCreateModal();
   const { openDescription } = useDescriptionModal();
   const { openDelete } = useDeleteModal();
   const { isData } = useTodoSWR();
-  const { changeCheck } = useCompleted();
   const isTodo = useRecoilValue(todoState);
   const setIndex = useSetRecoilState(indexState);
   const setForm = useSetRecoilState(formState);
@@ -92,7 +84,7 @@ const CompleteCard: React.FC = () => {
   const { openDelete } = useDeleteModal();
   const isTodo = useRecoilValue(todoState);
   const { isData } = useTodoSWR();
-  const { changeCheck } = useCompleted();
+
   const setIndex = useSetRecoilState(indexState);
   const setForm = useSetRecoilState(formState);
   const setTodo = useSetRecoilState(todoState);
